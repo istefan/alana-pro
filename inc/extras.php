@@ -26,7 +26,7 @@ function alana_body_classes( $classes ) {
 	}
 
 	if ( ! is_active_sidebar( 'sidebar-1' ) ) {
-		$classes[] = 'no-sidebar';
+		$classes[] = 'page-template-template-no-sidebar';
 	}
 
 	return $classes;
@@ -43,6 +43,33 @@ function alana_pingback_header() {
 	}
 }
 add_action( 'wp_head', 'alana_pingback_header' );
+
+
+/**
+ * Echo header scripts in to wp_head().
+ */
+function alana_header_scripts() {
+	global $post;
+
+	echo html_entity_decode( apply_filters( 'alana_header_scripts', get_theme_mod( 'alana_header_scripts' ) ) );
+
+	// If singular, echo scripts from custom field
+	if ( is_singular() )
+		echo html_entity_decode( get_post_meta( $post->ID, '_alana_scripts', true ) );
+
+}
+add_action( 'wp_head', 'alana_header_scripts' );
+add_filter( 'alana_header_scripts', 'do_shortcode' );
+
+ 
+/**
+ * Echo the footer scripts.
+ */
+function alana_footer_scripts() {
+	echo html_entity_decode( apply_filters( 'alana_footer_scripts', get_theme_mod( 'alana_footer_scripts' ) ) );
+}
+add_action( 'wp_footer', 'alana_footer_scripts' );
+add_filter( 'alana_footer_scripts', 'do_shortcode' );
 
 
 if ( ! function_exists( 'alana_excerpt_more' ) && ! is_admin() ) :
@@ -262,3 +289,26 @@ function alana_register_post_type_portfolio() {
 }
 
 add_action( 'init', 'alana_register_post_type_portfolio' );
+
+
+/**
+ * Default Portfolio posts / page.
+ */
+function alana_portfolio_query( $query ){
+    if( ! is_admin()
+        && $query->is_post_type_archive( 'portfolio' )
+        && $query->is_main_query() ){
+            $query->set( 'posts_per_page', get_theme_mod( 'alana_portfolio_posts', '12' ) );
+    }
+}
+add_action( 'pre_get_posts', 'alana_portfolio_query' );
+
+
+/**
+ * Display 12 products per page - WooCommerce
+ */
+function alana_woocommerce_products_per_page() {
+	return 12;
+}
+add_filter( 'loop_shop_per_page', 'alana_woocommerce_products_per_page', 20 );
+
