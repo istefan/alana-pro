@@ -1,12 +1,44 @@
 <?php
 /**
- * Customizer Control Examples.
+ * Customizer Controls.
  *
- * @package Alana
+ * @package WPshed Customizer Framework
  */
 
+// User access level
+$capability = 'edit_theme_options';
+
+// Option type
+$type = 'theme_mod'; // option / theme_mod
+
 /* ---------------------------------------------------------------------------------------------------
-    Examples
+    Panels
+--------------------------------------------------------------------------------------------------- */
+
+// Panel
+$options[] = array( 'title'             => __( 'Theme Options', 'alana' ),
+                    'description'       => '',
+                    'id'                => 'alana_theme_options',
+                    'priority'          => 10,
+                    'theme_supports'    => '',
+                    'type'              => 'panel' );
+
+
+/* ---------------------------------------------------------------------------------------------------
+    Sections
+--------------------------------------------------------------------------------------------------- */
+
+// Section
+$options[] = array( 'title'             => __( 'Test Section', 'alana' ),
+                    'description'       => __( 'Section description', 'alana' ),
+                    'panel'             => 'alana_theme_options',
+                    'id'                => 'alana_section_id',
+                    'priority'          => 10,
+                    'theme_supports'    => '',
+                    'type'              => 'section' );
+
+/* ---------------------------------------------------------------------------------------------------
+    Controls
 --------------------------------------------------------------------------------------------------- */
 
 // Text
@@ -99,11 +131,10 @@ $options[] = array( 'title'             => __( 'File Upload Field', 'alana' ),
                     'sanitize_callback' => '',
                     'type'              => 'control' );
 
-
 // URL
 $options[] = array( 'title'             => __( 'URL Field', 'alana' ),
                     'description'       => '',
-                    'section'           => 'alana_section_2',
+                    'section'           => 'alana_section_id',
                     'id'                => 'alana_url',
                     'default'           => '',
                     'option'            => 'url',
@@ -113,7 +144,7 @@ $options[] = array( 'title'             => __( 'URL Field', 'alana' ),
 // Email
 $options[] = array( 'title'             => __( 'Email Field', 'alana' ),
                     'description'       => '',
-                    'section'           => 'alana_section_2',
+                    'section'           => 'alana_section_id',
                     'id'                => 'alana_email',
                     'default'           => '',
                     'option'            => 'email',
@@ -123,7 +154,7 @@ $options[] = array( 'title'             => __( 'Email Field', 'alana' ),
 // Password
 $options[] = array( 'title'             => __( 'Password Field', 'alana' ),
                     'description'       => '',
-                    'section'           => 'alana_section_2',
+                    'section'           => 'alana_section_id',
                     'id'                => 'alana_password',
                     'default'           => '',
                     'option'            => 'password',
@@ -133,7 +164,7 @@ $options[] = array( 'title'             => __( 'Password Field', 'alana' ),
 // number
 $options[] = array( 'title'             => __( 'number Field (px)', 'alana' ),
                     'description'       => '',
-                    'section'           => 'alana_section_2',
+                    'section'           => 'alana_section_id',
                     'id'                => 'alana_number',
                     'default'           => 70,
                     'option'            => 'number',
@@ -149,7 +180,7 @@ $options[] = array( 'title'             => __( 'number Field (px)', 'alana' ),
 // Pages
 $options[] = array( 'title'             => __( 'Pages Field', 'alana' ),
                     'description'       => '',
-                    'section'           => 'alana_section_3',
+                    'section'           => 'alana_section_id',
                     'id'                => 'alana_pages',
                     'default'           => 0,
                     'option'            => 'pages',
@@ -159,7 +190,7 @@ $options[] = array( 'title'             => __( 'Pages Field', 'alana' ),
 // Categories
 $options[] = array( 'title'             => __( 'Categories Field', 'alana' ),
                     'description'       => '',
-                    'section'           => 'alana_section_3',
+                    'section'           => 'alana_section_id',
                     'id'                => 'alana_categories',
                     'default'           => 0,
                     'option'            => 'categories',
@@ -169,7 +200,7 @@ $options[] = array( 'title'             => __( 'Categories Field', 'alana' ),
 // Tags
 $options[] = array( 'title'             => __( 'Tags Field', 'alana' ),
                     'description'       => '',
-                    'section'           => 'alana_section_3',
+                    'section'           => 'alana_section_id',
                     'id'                => 'alana_tags',
                     'default'           => '',
                     'option'            => 'tags',
@@ -179,7 +210,7 @@ $options[] = array( 'title'             => __( 'Tags Field', 'alana' ),
 // Post Types
 $options[] = array( 'title'             => __( 'Post Types Field', 'alana' ),
                     'description'       => '',
-                    'section'           => 'alana_section_3',
+                    'section'           => 'alana_section_id',
                     'id'                => 'alana_post_types',
                     'default'           => '',
                     'option'            => 'post_types',
@@ -189,7 +220,7 @@ $options[] = array( 'title'             => __( 'Post Types Field', 'alana' ),
 // Posts
 $options[] = array( 'title'             => __( 'Posts Field', 'alana' ),
                     'description'       => '',
-                    'section'           => 'alana_section_3',
+                    'section'           => 'alana_section_id',
                     'id'                => 'alana_posts',
                     'default'           => '',
                     'option'            => 'posts',
@@ -199,7 +230,7 @@ $options[] = array( 'title'             => __( 'Posts Field', 'alana' ),
 // Users
 $options[] = array( 'title'             => __( 'Users Field', 'alana' ),
                     'description'       => '',
-                    'section'           => 'alana_section_3',
+                    'section'           => 'alana_section_id',
                     'id'                => 'alana_users',
                     'default'           => '',
                     'option'            => 'users',
@@ -209,12 +240,9 @@ $options[] = array( 'title'             => __( 'Users Field', 'alana' ),
 // Menus
 $options[] = array( 'title'             => __( 'Menus Field', 'alana' ),
                     'description'       => '',
-                    'section'           => 'alana_section_3',
+                    'section'           => 'alana_section_id',
                     'id'                => 'alana_menus',
                     'default'           => '',
                     'option'            => 'menus',
                     'sanitize_callback' => '',
                     'type'              => 'control' );
-
-
-             
